@@ -16,10 +16,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-// app.use("/api/auth", authRoutes);
-// app.use("/api/products", productRoutes);
-// app.use("/api/customers", customerRoutes);
-// app.use("/api/transactions", transactionRoutes);
 
 // Database synchronization
 db.sync()
