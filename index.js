@@ -1,67 +1,32 @@
 import express from "express";
-import cors from "cors";
-import session from "express-session";
 import dotenv from "dotenv";
+import cors from "cors";
+import bodyParser from "body-parser";
 import db from "./config/Database.js";
-import SequelizeStore from "connect-session-sequelize";
-// import userRoutes from "./routes/userRoutes.js";
-// import jobRoutes from "./routes/jobRoutes.js";
-// import applicantRoutes from "./routes/applicantRoutes.js";
-// import authRoute from "./routes/authRoute.js";
 dotenv.config();
 
 const app = express();
 
-const sessionStore = SequelizeStore(session.Store);
-
-const store = new sessionStore({
-  db: db,
-});
-
-// // Sinkronisasi database
-(async () => {
-  try {
-    await db.authenticate();
-    console.log("Database connected...");
-    await db.sync(); // Sinkronisasi database
-    await store.sync(); // Sinkronisasi session store
-  } catch (error) {
-    console.error("Connection error:", error);
-  }
-})();
-
 app.get("/", (req, res) => {
-  res.json({ msg: "Hello World from backend ADEL" });
+  res.json({ msg: "DPSI Adel" });
 });
 
-app.use(
-  session({
-    secret: process.env.SESS_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: store,
-    cookie: {
-      secure: "auto",
-    },
-  })
-);
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
 
-app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:8000",
-  })
-);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// app.use(userRoutes);
-// app.use(jobRoutes);
-// app.use(applicantRoutes);
-// app.use(authRoute);
+// Routes
+// app.use("/api/auth", authRoutes);
+// app.use("/api/products", productRoutes);
+// app.use("/api/customers", customerRoutes);
+// app.use("/api/transactions", transactionRoutes);
 
-// store.sync();
+// Database synchronization
+db.sync()
+  .then(() => console.log("Database connected"))
+  .catch((err) => console.error("Database connection error:", err));
 
-app.listen(process.env.APP_PORT, () => {
-  console.log("server up and running...");
-  // Running localhost http://localhost:8080
+const PORT = process.env.APP_PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
