@@ -28,7 +28,7 @@ router.post(
   authorizeRole(["manager", "staff"]),
   createIncomeReport
 );
-router.put(
+router.patch(
   "/:id",
   authenticateJWT,
   authorizeRole(["manager", "staff"]),

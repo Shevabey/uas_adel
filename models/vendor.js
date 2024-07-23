@@ -15,7 +15,7 @@ const Vendor = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    addres: {
+    address: {
       type: DataTypes.STRING,
       allowNull: false,
     },

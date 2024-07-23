@@ -8,6 +8,7 @@ import incomeReportRoutes from "./routes/incomeReportRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import vendorRoutes from "./routes/vendorRoutes.js";
 import managerRoutes from "./routes/managerRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/income-reports", incomeReportRoutes);
 app.use("/api/users", userRoutes);

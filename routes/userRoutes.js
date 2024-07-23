@@ -12,8 +12,8 @@ const router = express.Router();
 
 router.get("/", authenticateJWT, authorizeRole(["manager"]), getUsers);
 router.get("/:id", authenticateJWT, authorizeRole(["manager"]), getUserById);
-router.post("/", createUser); // No authentication needed for registration
-router.put("/:id", authenticateJWT, authorizeRole(["manager"]), updateUser);
+router.post("/add", createUser); // No authentication needed for registration
+router.patch("/:id", authenticateJWT, authorizeRole(["manager"]), updateUser);
 router.delete("/:id", authenticateJWT, authorizeRole(["manager"]), deleteUser);
 
 export default router;

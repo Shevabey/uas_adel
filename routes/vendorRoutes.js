@@ -12,8 +12,8 @@ const router = express.Router();
 
 router.get("/", authenticateJWT, authorizeRole(["manager"]), getVendors);
 router.get("/:id", authenticateJWT, authorizeRole(["manager"]), getVendorById);
-router.post("/", authenticateJWT, authorizeRole(["manager"]), createVendor);
-router.put("/:id", authenticateJWT, authorizeRole(["manager"]), updateVendor);
+router.post("/add", authenticateJWT, authorizeRole(["manager"]), createVendor);
+router.patch("/:id", authenticateJWT, authorizeRole(["manager"]), updateVendor);
 router.delete(
   "/:id",
   authenticateJWT,
