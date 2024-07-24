@@ -9,6 +9,8 @@ import userRoutes from "./routes/userRoutes.js";
 import vendorRoutes from "./routes/vendorRoutes.js";
 import managerRoutes from "./routes/managerRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import salesReportRoutes from "./routes/salesReportRoutes.js";
+import itemRoutes from "./routes/itemRoutes.js";
 
 dotenv.config();
 
@@ -29,6 +31,8 @@ app.use("/api/income-reports", incomeReportRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/vendors", vendorRoutes);
 app.use("/api/managers", managerRoutes);
+app.use("/api/sales-reports", salesReportRoutes);
+app.use("/api/items", itemRoutes);
 
 // Database synchronization
 db.sync()

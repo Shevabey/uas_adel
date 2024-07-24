@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get("/", authenticateJWT, authorizeRole(["manager"]), getManagers);
 router.get("/:id", authenticateJWT, authorizeRole(["manager"]), getManagerById);
-router.post("/", authenticateJWT, authorizeRole(["manager"]), createManager);
+router.post("/add", authenticateJWT, authorizeRole(["manager"]), createManager);
 router.patch(
   "/:id",
   authenticateJWT,

@@ -35,9 +35,12 @@ const User = db.define(
       },
     },
     role: {
-      type: DataTypes.ENUM("manager", "staff"),
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "staff",
+      validate: {
+        notEmpty: true,
+        isIn: [["staff", "manager"]],
+      },
     },
   },
   {

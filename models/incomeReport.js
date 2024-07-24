@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
+import Manager from "./manager.js";
 
 const { DataTypes } = Sequelize;
 
@@ -24,5 +25,8 @@ const IncomeReport = db.define(
     freezeTableName: true,
   }
 );
+
+Manager.hasMany(IncomeReport, { foreignKey: "id_manager" });
+IncomeReport.belongsTo(Manager, { foreignKey: "id_manager" });
 
 export default IncomeReport;

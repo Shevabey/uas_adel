@@ -6,61 +6,72 @@ export const getTransactions = async (req, res) => {
     const transactions = await Transaction.findAll();
     res.json(transactions);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Get a single transaction
+// Get transaction by ID
 export const getTransactionById = async (req, res) => {
   try {
     const transaction = await Transaction.findByPk(req.params.id);
-    if (!transaction)
-      return res.status(404).json({ message: "Transaction not found" });
-    res.json(transaction);
+    if (transaction) {
+      res.json(transaction);
+    } else {
+      res.status(404).json({ message: "Transaction not found" });
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Create a new transaction
+// Create new transaction
 export const createTransaction = async (req, res) => {
-  const { amount, date, type, id_user } = req.body;
   try {
+    const { amount, date, type, id_vendor, id_manager } = req.body;
     const newTransaction = await Transaction.create({
       amount,
       date,
       type,
-      id_user,
+      id_vendor,
+      id_manager,
     });
     res.status(201).json(newTransaction);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Update a transaction
+// Update transaction by ID
 export const updateTransaction = async (req, res) => {
   try {
-    const transaction = await Transaction.findByPk(req.params.id);
-    if (!transaction)
-      return res.status(404).json({ message: "Transaction not found" });
-    const { amount, date, type, id_user } = req.body;
-    await transaction.update({ amount, date, type, id_user });
-    res.json(transaction);
+    const { amount, date, type } = req.body;
+    const [updated] = await Transaction.update(
+      { amount, date, type },
+      { where: { id_transaction: req.params.id } }
+    );
+    if (updated) {
+      const updatedTransaction = await Transaction.findByPk(req.params.id);
+      res.json(updatedTransaction);
+    } else {
+      res.status(404).json({ message: "Transaction not found" });
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Delete a transaction
+// Delete transaction by ID
 export const deleteTransaction = async (req, res) => {
   try {
-    const transaction = await Transaction.findByPk(req.params.id);
-    if (!transaction)
-      return res.status(404).json({ message: "Transaction not found" });
-    await transaction.destroy();
-    res.json({ message: "Transaction deleted" });
+    const deleted = await Transaction.destroy({
+      where: { id_transaction: req.params.id },
+    });
+    if (deleted) {
+      res.json({ message: "Transaction deleted" });
+    } else {
+      res.status(404).json({ message: "Transaction not found" });
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };

@@ -1,5 +1,6 @@
 import Manager from "../models/manager.js";
 import User from "../models/user.js";
+import bcrypt from "bcrypt";
 
 // Mendapatkan semua manajer
 export const getManagers = async (req, res) => {
@@ -30,11 +31,14 @@ export const createManager = async (req, res) => {
   const { username, email, password, role } = req.body;
 
   try {
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // Buat pengguna baru terlebih dahulu
     const newUser = await User.create({
       username,
       email,
-      password,
+      password: hashedPassword,
       role: "manager", // Pastikan role adalah manager
     });
 

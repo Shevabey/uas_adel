@@ -1,12 +1,12 @@
 import express from "express";
 import { authenticateJWT, authorizeRole } from "../middleware/authUser.js";
 import {
-  getTransactions,
-  getTransactionById,
-  createTransaction,
-  updateTransaction,
-  deleteTransaction,
-} from "../controllers/transactionController.js";
+  getSalesReports,
+  getSalesReportById,
+  createSalesReport,
+  updateSalesReport,
+  deleteSalesReport,
+} from "../controllers/salesReportController.js";
 
 const router = express.Router();
 
@@ -14,31 +14,31 @@ router.get(
   "/",
   authenticateJWT,
   authorizeRole(["manager", "staff"]),
-  getTransactions
+  getSalesReports
 );
 router.get(
   "/:id",
   authenticateJWT,
   authorizeRole(["manager", "staff"]),
-  getTransactionById
+  getSalesReportById
 );
 router.post(
   "/add",
   authenticateJWT,
   authorizeRole(["manager", "staff"]),
-  createTransaction
+  createSalesReport
 );
 router.patch(
   "/:id",
   authenticateJWT,
-  authorizeRole(["manager", "staff"]),
-  updateTransaction
+  authorizeRole(["manager"]),
+  updateSalesReport
 );
 router.delete(
   "/:id",
   authenticateJWT,
-  authorizeRole(["manager", "staff"]),
-  deleteTransaction
+  authorizeRole(["manager"]),
+  deleteSalesReport
 );
 
 export default router;
