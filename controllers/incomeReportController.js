@@ -1,4 +1,4 @@
-import IncomeReport from "../models/IncomeReport.js";
+import IncomeReport from "../models/incomeReport.js";
 
 // Get all income reports
 export const getIncomeReports = async (req, res) => {
