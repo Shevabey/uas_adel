@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/Database.js";
-import Item from "./Item.js";
-import Manager from "./Manager.js";
+import Item from "./item.js";
+import Manager from "./manager.js";
 
 const SalesReport = db.define(
   "SalesReport",
