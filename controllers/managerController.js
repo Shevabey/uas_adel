@@ -1,5 +1,5 @@
-import Manager from "../models/manager.js";
-import User from "../models/user.js";
+import Manager from "../models/Manager.js";
+import User from "../models/User.js";
 import bcrypt from "bcrypt";
 
 // Mendapatkan semua manajer

@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
-import Manager from "./manager.js";
+import Manager from "./Manager.js";
 
 const { DataTypes } = Sequelize;
 
