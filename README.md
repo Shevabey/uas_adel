@@ -27,3 +27,21 @@ Port development
 http://localhost:8080
 
 ```
+Port Production
+```bash
+https://uasadel-production.up.railway.app/
+
+```
+Login Account Manager
+```bash
+{
+    
+  "email": "manager@gmail.com",
+  "password": "12345"
+
+}
+
+```
+
+
+
