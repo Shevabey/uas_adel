@@ -1,6 +1,6 @@
 import Manager from "../models/manager.js";
 import User from "../models/user.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 // Mendapatkan semua manajer
 export const getManagers = async (req, res) => {
